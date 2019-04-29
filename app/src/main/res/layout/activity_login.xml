@@ -28,7 +28,8 @@
         <LinearLayout
             android:id="@+id/email_login_form"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginVertical="250dp"
             android:orientation="vertical">
 
             <android.support.design.widget.TextInputLayout
@@ -69,9 +70,19 @@
                 style="?android:textAppearanceSmall"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginTop="100dp"
+                android:layout_marginBottom="0dp"
                 android:text="@string/action_sign_in"
                 android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/register"
+                android:textAlignment="center"
+                android:text="Not yet registered? Click here."
+                />
 
         </LinearLayout>
     </ScrollView>
