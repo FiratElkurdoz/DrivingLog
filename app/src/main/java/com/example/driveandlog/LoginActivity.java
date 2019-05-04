@@ -3,6 +3,8 @@ package com.example.driveandlog;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.arch.lifecycle.Lifecycle;
+import android.arch.lifecycle.OnLifecycleEvent;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
@@ -29,6 +31,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -95,6 +98,45 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mProgressView = findViewById(R.id.login_progress);
 
         configureNextButton();
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
+    public void testPauseState(){
+        setContentView(R.layout.activity_main);
+    }
+
+    @Override
+    protected void onStart(){
+        super.onStart();
+        Toast.makeText(this, "Start", Toast.LENGTH_LONG).show();
+
+    }
+
+    @Override
+    protected  void onResume(){
+        super.onResume();
+        showProgress(false);
+        Toast.makeText(this, "Resumed", Toast.LENGTH_LONG).show();
+
+    }
+
+    @Override
+    protected void onPause(){
+        super.onPause();
+        Toast.makeText(this, "Paused", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    protected void onStop(){
+        super.onStop();
+        Toast.makeText(this, "Stopped", Toast.LENGTH_LONG).show();
+        setContentView(R.layout.activity_onpause);
+
+    }
+
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
     }
 
     private void configureNextButton(){

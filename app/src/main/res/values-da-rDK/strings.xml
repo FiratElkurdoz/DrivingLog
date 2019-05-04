@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">DriveAndLog</string>
+    <string name="action_settings">Indstillinger</string>
+    <string name="action_sign_in">Log ind</string>
+    <string name="action_sign_in_short">Log ind</string>
+    <string name="error_field_required">Dette felt er krævet</string>
+    <string name="error_incorrect_password">Kodeordet er forkert</string>
+    <string name="error_invalid_email">Email adresse er forkert</string>
+    <string name="error_invalid_password">Kodeordet er for kort</string>
+    <string name="nav_header_desc">Navigationsside</string>
+    <string name="navigation_drawer_close">Luk navigationsside</string>
+    <string name="permission_rationale">Kontakt tilladelse er krævet</string>
+    <string name="prompt_password">Kodeord</string>
+    <string name="title_activity_login">Log ind</string>
+    <string name="title_activity_map_page">Kort</string>
+    <string name="onpause_text">Din applikation er paused</string>
+</resources>
