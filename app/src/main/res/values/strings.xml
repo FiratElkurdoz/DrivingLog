@@ -21,5 +21,10 @@
     </string>
     <string name="title_activity_map_page">Map</string>
     <string name="onpause_text">Your app is paused</string>
+    <string name="button">Button</string>
+    <string name="todo">TODO</string>
+    <string name="email">email</string>
+    <string name="name">Name</string>
+    <string name="choose">Choose</string>
     <string name="register_button">Not a user? Register here</string>
 </resources>
