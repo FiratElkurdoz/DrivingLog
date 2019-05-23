@@ -11,18 +11,20 @@ public class User {
     @PrimaryKey(autoGenerate = true)
     @NonNull
     @ColumnInfo(name = "userID")
-    private int mUserID;
+    public int mUserID;
     @NonNull
     @ColumnInfo(name = "username")
-    private String mUsername;
+    public String mUsername;
     @NonNull
-    @ColumnInfo(name = "email")
-    private String mUserEmail;
+    @ColumnInfo(name = "mail")
+    public String mMail;
 
-    public User(@NonNull int userID, @NonNull String username, @NonNull String email) {
+
+    public User(@NonNull int userID, @NonNull String username, @NonNull String mail) {
         this.mUserID = userID;
         this.mUsername = username;
-        this.mUserEmail = email;
+        this.mMail = mail;
+
     }
 
     public int getUser(){
