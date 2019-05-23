@@ -8,25 +8,27 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "user_table")
 public class User {
 
-
-
     @PrimaryKey(autoGenerate = true)
     @NonNull
     @ColumnInfo(name = "userID")
-    private int mUserID;
+    public int mUserID;
     @NonNull
-    private String mUsername;
+    @ColumnInfo(name = "username")
+    public String mUsername;
+    @NonNull
+    @ColumnInfo(name = "mail")
+    public String mMail;
 
-    public  User(@NonNull int userID, @NonNull String mUsername){
+
+    public User(@NonNull int userID, @NonNull String username, @NonNull String mail) {
         this.mUserID = userID;
-        this.mUsername = mUsername;
+        this.mUsername = username;
+        this.mMail = mail;
+
     }
 
-    public int getUserID(){
+    public int getUser(){
         return this.mUserID;
     }
 
-    public String getUsername(){
-        return this.mUsername;
-    }
 }

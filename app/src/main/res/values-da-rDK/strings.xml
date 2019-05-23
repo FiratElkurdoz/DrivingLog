@@ -15,4 +15,5 @@
     <string name="title_activity_login">Log ind</string>
     <string name="title_activity_map_page">Kort</string>
     <string name="onpause_text">Din applikation er paused</string>
+    <string name="register_button">Har du ikke en bruger? Opret dig her</string>
 </resources>
