@@ -26,4 +26,7 @@
     <string name="email">email</string>
     <string name="name">Name</string>
     <string name="choose">Choose</string>
+    <string name="title_activity_list">List</string>
+    <string name="action_sort">sort</string>
+    <string name="action_add">add</string>
 </resources>
