@@ -21,10 +21,13 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.text.Layout;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -35,6 +38,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -98,12 +102,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mProgressView = findViewById(R.id.login_progress);
 
         configureNextButton();
+        registerButton();
     }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
-    public void testPauseState(){
-        setContentView(R.layout.activity_main);
-    }
+
 
     @Override
     protected void onStart(){
@@ -115,9 +117,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     @Override
     protected  void onResume(){
         super.onResume();
-        showProgress(false);
         Toast.makeText(this, "Resumed", Toast.LENGTH_LONG).show();
-
     }
 
     @Override
@@ -130,13 +130,23 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     protected void onStop(){
         super.onStop();
         Toast.makeText(this, "Stopped", Toast.LENGTH_LONG).show();
-        setContentView(R.layout.activity_onpause);
 
     }
 
     @Override
     protected void onDestroy(){
         super.onDestroy();
+        Toast.makeText(this, "Killed", Toast.LENGTH_LONG).show();
+    }
+
+    private void registerButton(){
+        Button registerButton = findViewById(R.id.register_button);
+        registerButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                startActivity(new Intent(LoginActivity.this, SignupActivity.class));
+            }
+        });
     }
 
     private void configureNextButton(){
