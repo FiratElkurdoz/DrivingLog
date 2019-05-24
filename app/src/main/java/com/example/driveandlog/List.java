@@ -2,6 +2,7 @@ package com.example.driveandlog;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.graphics.Region;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,9 +13,6 @@ import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -24,24 +22,66 @@ import android.widget.AdapterView;
 
 
 public class List extends AppCompatActivity {
+
+    private static final String TAG = "List";
+
     //Arrays
     ArrayList<String> shoppingList = null;
     ArrayAdapter<String> adapter = null;
     ListView lv = null;
 
+    //Thread Stuff
+    Thread workerThread;
+    //Semaphore for keeping track of thread
+    volatile boolean running = true;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
-       // Toolbar toolbar = findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
 
-        //Det her virker, hvis de nederste funktioner er sat til
-       // shoppingList = getArrayVal(getApplicationContext());
+
+        //Create a thread
+        workerThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                //Make sure the thread is still supposed to run.
+                while (running) {
+
+                    // shoppingList = new ArrayList<>();
+
+                    // shoppinglist = get value from db
+
+                    //Have thread sleep for 10 seconds (10.000 ms)
+                    try {
+                        Thread.sleep(10000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+
+        //start the thread
+        workerThread.start();
+
+
+
+    /*
+    @Override
+    protected void onDestroy() {
+        // Stop running the thread
+        running = false;
+        super.onDestroy();
+        try {
+            workerThread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+*/
+
         shoppingList = new ArrayList<>();
-        //Collections.addAll(shoppingList, "Roadtrip", "aRoadtrip", "Roadtrip", "cRoadtrip", "Roadtrip", "DRoadtrip", "Roadtrip", "Roadtrip", "Roadtrip", "AARoadtrip", "BBRoadtrip", "KRoadtrip", "Roadtrip", "TRoadtrip", "Roadtrip", "Roadtrip", "Roadtrip");
-        //shoppingList.addAll(Arrays.asList("en", "to"));
-        //shoppingList.add("Monkey");
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, shoppingList);
         lv = (ListView) findViewById(R.id.listView);
         lv.setAdapter(adapter);
@@ -76,7 +116,6 @@ public class List extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
 
         if (id == R.id.action_sort) {
             Collections.sort(shoppingList);
@@ -95,10 +134,7 @@ public class List extends AppCompatActivity {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     shoppingList.add(preferredCase(input.getText().toString()));
-                    //Collections.sort(shoppingList);
-                    //Sorting so the newest is the top one
                     Collections.reverse(shoppingList);
-                    //storeArrayVal(shoppingList, getApplicationContext());
                     lv.setAdapter(adapter);
                 }
             });
@@ -133,7 +169,6 @@ public class List extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 shoppingList.remove(position);
                 Collections.reverse(shoppingList);
-
                 lv.setAdapter(adapter);
             }
         });
@@ -147,22 +182,4 @@ public class List extends AppCompatActivity {
         builder.show();
     }
 
-    //Androids egen internal storage, sharedpreferrences, virker dog ikke, hvis loginsiden er til, men kan bruges med databasen
-/*
-    public static void storeArrayVal (ArrayList inArrayList, Context context){
-        Set WhatToWrite = new HashSet(inArrayList);
-        SharedPreferences WordSearchPutPrefs = context.getSharedPreferences("dbArrayValues", Activity.MODE_PRIVATE);
-        SharedPreferences.Editor prefEditor = WordSearchPutPrefs.edit();
-        prefEditor.putString("myArray", String.valueOf(WhatToWrite));
-        prefEditor.commit();
-    }
-
-    public static ArrayList getArrayVal (Context dan){
-        SharedPreferences WordSearchGetPrefs = dan.getSharedPreferences("dbArrayValues", Activity.MODE_PRIVATE);
-        Set tempSet = new HashSet();
-        tempSet = WordSearchGetPrefs.getStringSet("myArray", tempSet);
-        return new ArrayList<>(tempSet);
-
-    }
-*/
 }
