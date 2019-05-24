@@ -159,6 +159,16 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         });
     }
 
+    private void showAllButton(){
+        Button showAllButton = findViewById(R.id.add_button);
+        showAllButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            }
+        });
+    }
+
     private void populateAutoComplete() {
         if (!mayRequestContacts()) {
             return;

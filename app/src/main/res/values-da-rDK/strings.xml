@@ -16,4 +16,10 @@
     <string name="title_activity_map_page">Kort</string>
     <string name="onpause_text">Din applikation er paused</string>
     <string name="register_button">Har du ikke en bruger? Opret dig her</string>
+    <string name="button_save">Gem</string>
+    <string name="choose">Vælg</string>
+    <string name="empty_not_saved">Bruger ikke gemt, da kravene ikke er opfyldt.</string>
+    <string name="hint_word">Bruger...</string>
+    <string name="name">Navn</string>
+    <string name="todo">Huskeliste</string>
 </resources>
