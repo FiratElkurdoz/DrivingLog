@@ -9,7 +9,7 @@
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
-    <!-- <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> -->
+    <!--<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> -->
     <!-- To auto-complete the email text field in the login form with the user's emails -->
 
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
@@ -25,7 +25,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="ExtraText,GoogleAppIndexingWarning">
-        <activity android:name=".LoginActivity">
+        <activity android:name=".List">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
@@ -41,19 +41,17 @@
             android:label="Map"/>-->
         <activity
             android:name=".MainActivity"
-            android:label="Main Activity"/>
-        <activity
-            android:name=".Profile"
-            android:label="Profile"/>
+            android:label="Main Activity"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".SignupActivity"
             android:label="Signup"/>
         <activity
-            android:name=".looool"
+            android:name=".Profile"
             android:label="TEST"/>
 
         <activity
-            android:name=".List"
+            android:name=".Map_page"
             android:label="Liste"/>
 
 

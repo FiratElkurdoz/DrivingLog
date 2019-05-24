@@ -3,11 +3,11 @@ package com.example.driveandlog;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
@@ -49,6 +49,9 @@ public class Map_page extends FragmentActivity implements OnMapReadyCallback {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map_page);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -56,8 +59,8 @@ public class Map_page extends FragmentActivity implements OnMapReadyCallback {
 
         startButton = (Button) findViewById(R.id.startButton);
         endButton = (Button) findViewById(R.id.endButton);
-        startButton.setOnClickListener((View.OnClickListener) this);
-        endButton.setOnClickListener((View.OnClickListener) this);
+//        startButton.setOnClickListener((View.OnClickListener) this);
+//        endButton.setOnClickListener((View.OnClickListener) this);
 
     }
 
@@ -126,7 +129,7 @@ public class Map_page extends FragmentActivity implements OnMapReadyCallback {
     }
 
     @Override
-    protected void onStop(){
+    protected void onStop() {
         super.onStop();
         Toast.makeText(this, "Stopped", Toast.LENGTH_LONG).show();
     }
