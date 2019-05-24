@@ -18,6 +18,10 @@ import com.google.android.material.snackbar.Snackbar;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import android.widget.Toast;
+import android.widget.TextView;
+import android.widget.AdapterView;
+
 
 public class List extends AppCompatActivity {
     //Arrays
@@ -42,7 +46,19 @@ public class List extends AppCompatActivity {
         lv = (ListView) findViewById(R.id.listView);
         lv.setAdapter(adapter);
 
-
+        //DELETE INDIVIDUAL THINGS
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView parent, View view, final int position, long id) {
+                String selectedItem = ((TextView) view).getText().toString();
+                if ( selectedItem.trim().equals(shoppingList.get(position).trim())) {
+                    removeElement(selectedItem, position);
+                }
+                else {
+                    Toast.makeText(getApplicationContext(), "Error removing element", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
     }
 
@@ -106,6 +122,29 @@ public class List extends AppCompatActivity {
 
         //if not empty, make first letter to upper case and the rest to lower case
         return original.substring(0,1).toUpperCase() + original.substring(1).toLowerCase();
+    }
+
+
+    public void removeElement(String selectedItem, final int position) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Remove " + selectedItem + "?");
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                shoppingList.remove(position);
+                Collections.reverse(shoppingList);
+
+                lv.setAdapter(adapter);
+            }
+        });
+
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        builder.show();
     }
 
     //Androids egen internal storage, sharedpreferrences, virker dog ikke, hvis loginsiden er til, men kan bruges med databasen
