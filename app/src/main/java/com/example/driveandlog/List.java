@@ -3,7 +3,6 @@ package com.example.driveandlog;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
-import android.graphics.Region;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -35,10 +34,6 @@ public class List extends AppCompatActivity {
     ArrayAdapter<String> adapter = null;
     ListView lv = null;
 
-    //Thread Stuff
-    Thread workerThread;
-    //Semaphore for keeping track of thread
-    volatile boolean running = true;
 
 
     @Override
@@ -46,46 +41,18 @@ public class List extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
 
-
-        //Create a thread
-        workerThread = new Thread(new Runnable() {
+/*
+        Runnable r = new Runnable() {
             @Override
             public void run() {
-                //Make sure the thread is still supposed to run.
-                while (running) {
-
-                    // shoppingList = new ArrayList<>();
-
-                    // shoppinglist = get value from db
-
-                    //Have thread sleep for 10 seconds (10.000 ms)
-                    try {
-                        Thread.sleep(10000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
+                shoppingList = new ArrayList<>();
             }
-        });
+        };
 
-        //start the thread
-        workerThread.start();
+        Thread FiratsThread = new Thread(r);
+        FiratsThread.start();
 
-
-
-    /*
-    @Override
-    protected void onDestroy() {
-        // Stop running the thread
-        running = false;
-        super.onDestroy();
-        try {
-            workerThread.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
 */
-
         //shoppingList = new ArrayList<>();
         loadData();
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, shoppingList);
@@ -156,14 +123,16 @@ public class List extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-private void saveData() {
-    SharedPreferences sharedPreferences = getSharedPreferences("Shared prefs", MODE_PRIVATE);
-    SharedPreferences.Editor editor = sharedPreferences.edit();
-    Gson gson = new Gson();
-    String json = gson.toJson(shoppingList);
-    editor.putString("task list", json);
-    editor.apply();
-}
+
+    private void saveData() {
+        SharedPreferences sharedPreferences = getSharedPreferences("Shared prefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        //gson: et google libary der gør det let at konvertere java objekter til json
+        Gson gson = new Gson();
+        String json = gson.toJson(shoppingList);
+        editor.putString("task list", json);
+        editor.apply();
+        }
 
     private void loadData() {
         SharedPreferences sharedPreferences = getSharedPreferences("Shared prefs", MODE_PRIVATE);
