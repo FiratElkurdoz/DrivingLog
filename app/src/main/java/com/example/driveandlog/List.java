@@ -2,6 +2,7 @@ package com.example.driveandlog;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.graphics.Region;
 import android.os.Bundle;
 import android.view.Menu;
@@ -13,12 +14,16 @@ import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collections;
 
 import android.widget.Toast;
 import android.widget.TextView;
 import android.widget.AdapterView;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 
 public class List extends AppCompatActivity {
@@ -81,7 +86,8 @@ public class List extends AppCompatActivity {
         }
 */
 
-        shoppingList = new ArrayList<>();
+        //shoppingList = new ArrayList<>();
+        loadData();
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, shoppingList);
         lv = (ListView) findViewById(R.id.listView);
         lv.setAdapter(adapter);
@@ -135,6 +141,7 @@ public class List extends AppCompatActivity {
                 public void onClick(DialogInterface dialog, int which) {
                     shoppingList.add(preferredCase(input.getText().toString()));
                     Collections.reverse(shoppingList);
+                    saveData();
                     lv.setAdapter(adapter);
                 }
             });
@@ -148,6 +155,26 @@ public class List extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+private void saveData() {
+    SharedPreferences sharedPreferences = getSharedPreferences("Shared prefs", MODE_PRIVATE);
+    SharedPreferences.Editor editor = sharedPreferences.edit();
+    Gson gson = new Gson();
+    String json = gson.toJson(shoppingList);
+    editor.putString("task list", json);
+    editor.apply();
+}
+
+    private void loadData() {
+        SharedPreferences sharedPreferences = getSharedPreferences("Shared prefs", MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = sharedPreferences.getString("task list", null);
+        Type type = new TypeToken<ArrayList>() {}.getType();
+        shoppingList = gson.fromJson(json, type);
+
+        if (shoppingList == null){
+            shoppingList = new ArrayList<>();
+        }
     }
 
     public static String preferredCase(String original)
@@ -169,6 +196,7 @@ public class List extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 shoppingList.remove(position);
                 Collections.reverse(shoppingList);
+                saveData();
                 lv.setAdapter(adapter);
             }
         });
