@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -41,18 +42,30 @@ public class List extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
 
-/*
+
         Runnable r = new Runnable() {
             @Override
             public void run() {
-                shoppingList = new ArrayList<>();
+                //shoppingList = new ArrayList<>();
+                for (int i = 0; i < 100; i++) {
+                    Log.d(TAG, "startThread: " + i);
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                loadData();
+
             }
+
         };
 
         Thread FiratsThread = new Thread(r);
         FiratsThread.start();
 
-*/
+
         //shoppingList = new ArrayList<>();
         loadData();
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, shoppingList);
@@ -145,6 +158,24 @@ public class List extends AppCompatActivity {
             shoppingList = new ArrayList<>();
         }
     }
+
+    /*
+
+        updateShoppingList(localShoppingList);
+    }
+/*
+    private void updateShoppingList(final ArrayList<String> lst){
+        lv.post(new Runnable() {
+            @Override
+            public void run() {
+                shoppingList = lst;
+                if (shoppingList == null){
+                    shoppingList = new ArrayList<>();
+                }
+            }
+        });
+    }
+*/
 
     public static String preferredCase(String original)
     {
