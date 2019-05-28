@@ -2,6 +2,7 @@ package com.example.driveandlog;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
@@ -41,6 +43,14 @@ public class List extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
+
+        Button yourButton = (Button) findViewById(R.id.button2);
+
+        yourButton.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                startActivity(new Intent(List.this, Map_page.class));
+            }
+        });
 
 
         Runnable r = new Runnable() {
@@ -209,5 +219,8 @@ public class List extends AppCompatActivity {
         });
         builder.show();
     }
+
+
+
 
 }
