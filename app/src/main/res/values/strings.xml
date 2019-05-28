@@ -21,7 +21,7 @@
     </string>
     <string name="title_activity_map_page">Map</string>
     <string name="onpause_text">Your app is paused</string>
-    <string name="button" translatable="false">Button</string>
+    <string name="button">Button</string>
     <string name="todo">TODO</string>
     <string name="email" translatable="false">email</string>
     <string name="name">Name</string>
@@ -34,5 +34,7 @@
     <string name="register_button">Not a user? Register here</string>
     <string name="end_trip">End Trip</string>
     <string name="start_trip">Start Trip</string>
+
+    <string name="select_user">Select a user</string>
 
 </resources>
