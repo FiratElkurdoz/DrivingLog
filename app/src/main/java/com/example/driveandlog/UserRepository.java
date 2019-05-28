@@ -30,6 +30,7 @@ public class UserRepository {
         private UserDao mAsyncTaskDao;
 
         insertAsyncTask(UserDao dao) {
+
             mAsyncTaskDao = dao;
         }
 

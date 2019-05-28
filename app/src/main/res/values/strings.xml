@@ -23,7 +23,7 @@
     <string name="onpause_text">Your app is paused</string>
     <string name="button">Button</string>
     <string name="todo">TODO</string>
-    <string name="email">email</string>
+    <string name="email" translatable="false">email</string>
     <string name="name">Name</string>
     <string name="choose">Choose</string>
 
@@ -36,5 +36,7 @@
     <string name="start_trip">Start Trip</string>
     <string name="trip_s_over">Trip\'s over!</string>
     <string name="distance_string">adasdw</string>
+
+    <string name="select_user">Select a user</string>
 
 </resources>
