@@ -21,7 +21,8 @@
             android:name="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="match_parent"
             android:layout_height="700dp"
-            tools:context=".Map_page" />
+            tools:context=".Map_page"
+            tools:layout="@layout/activity_map_page" />
 
     <Button
         android:id="@+id/startButton"
@@ -32,7 +33,7 @@
         android:layout_marginEnd="162dp"
         android:layout_marginBottom="278dp"
         android:background="#03A9F4"
-        android:text="Start Trip" />
+        android:text="@string/start_trip" />
 
     <Button
         android:id="@+id/endButton"
@@ -43,7 +44,7 @@
         android:layout_marginEnd="162dp"
         android:layout_marginBottom="278dp"
         android:background="#F44336"
-        android:text="End Trip"
+        android:text="@string/end_trip"
         android:visibility="invisible" />
 
 
