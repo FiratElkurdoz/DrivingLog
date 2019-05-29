@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:background="#504A4C"
 
+
     tools:context=".Create_Log">
 
     <androidx.constraintlayout.widget.ConstraintLayout

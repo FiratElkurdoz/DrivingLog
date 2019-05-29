@@ -80,11 +80,8 @@ public class List extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 }
-
                 loadData();
-
             }
-
         };
 
         Thread FiratsThread = new Thread(r);
@@ -141,8 +138,6 @@ public class List extends AppCompatActivity {
             //Allowing us to edit (type)
             final EditText logName = new EditText(this);
             builder.setView(logName);
-            final EditText partiName = new EditText(this);
-            builder.setView(partiName);
             builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
