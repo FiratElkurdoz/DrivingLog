@@ -34,9 +34,16 @@
     <string name="register_button">Not a user? Register here</string>
     <string name="end_trip">End Trip</string>
     <string name="start_trip">Start Trip</string>
-    <string name="trip_s_over">Trip\'s over!</string>
-    <string name="distance_string">adasdw</string>
+    <string name="logsbutton" translatable="false">logsButton</string>
+    <string name="profilebutton" translatable="false">profileButton</string>
+    <string name="mapsbutton" translatable="false">mapsButton</string>
+    <string name="trip_s_over" translatable="false">Trip\'s over!</string>
+    <string name="distance_string" translatable="false">adasdw</string>
 
+    <string name="select_user" translatable="false">Select a user</string>
+    <string name="profile" translatable="false">profile</string>
+    <string name="Log" translatable="false">Log</string>
+    <string name="Map" translatable="false">Map</string>
     <string name="select_user">Select a user</string>
     <string name="title_activity_create__log">Create_Log</string>
 
