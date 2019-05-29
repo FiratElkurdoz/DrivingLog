@@ -2,7 +2,8 @@ package com.example.driveandlog;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
+import android.location.Location;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,47 +12,50 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
-import com.example.driveandlog.POJO.Example;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
-import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.maps.GeoApiContext;
 
-import java.util.ArrayList;
-import java.util.List;
+import static android.widget.Toast.LENGTH_LONG;
 
-import retrofit.Call;
-import retrofit.Callback;
-import retrofit.GsonConverterFactory;
-import retrofit.Response;
-import retrofit.Retrofit;
-
-public class Map_page extends FragmentActivity implements OnMapReadyCallback {
+public class Map_page extends FragmentActivity implements OnMapReadyCallback,GeoTask.Geo {
 
     private GoogleMap mMap;
-    private double longtitude;
-    private double latitude;
 
-    private double startLongtitude;
-    private double startLatitude;
+    private double startLongtitude = 55.506930;
+    private double startLatitude =  10.471870;
 
-    private double endLongtitude;
-    private double endLatitude;
 
-    private boolean isTripStarted = false;
+    private double endLongtitude = 55.408884;
+    private double endLatitude = 10.395557;
+
+    public boolean isTripStarted = false;
+
+    private String mDefaultLocation = "-33.8523341, 151.2106085";
+    private static final int DEFAULT_ZOOM = 15;
+    private Location location;
+    private GeoApiContext mgeoAPIContext = null;
+
 
 
     LatLng origin;
     LatLng dest;
-    ArrayList<LatLng> MarkerPoints;
+    public LatLng startMarkerPoints[];
+    public LatLng endMarkerPoints[];
+
     TextView ShowDistanceDuration;
     Polyline line;
 
@@ -85,21 +89,39 @@ public class Map_page extends FragmentActivity implements OnMapReadyCallback {
         mapFragment.getMapAsync(this);
 
 
-        Button startButton = (Button) findViewById(R.id.startButton);
+        final Button startButton = (Button) findViewById(R.id.startButton);
         startButton.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onClick(View v) {
-                build_retrofit_and_get_response("driving");
+                //build_retrofit_and_get_response("driving");
+                if(!isTripStarted) {
+                    Log.d("startKnap","START!");
+                    startTrack();
+                    isTripStarted = true;
+                }
+                //Log.d("location", mLastKnownLocation.toString());
             }
         });
+
         Button endButton = (Button) findViewById(R.id.endButton);
-        startButton.setOnClickListener(new View.OnClickListener() {
+        endButton.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onClick(View v) {
-                build_retrofit_and_get_response("driving");
+                if(isTripStarted = true) {
+                    Log.d("slutKnap", "SLUT!");
+                    endTrack();
+                    mDefaultLocation = mDefaultLocation.toString();
+                    String url = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=40.6655101,-73.89188969999998&destinations=40.6905615,-73.9976592&mode=driving&key=AIzaSyB6-Lyogq5ysn7MMSgX7PBUKdX2wWeA9xI";
+                    new GeoTask(Map_page.this).execute(url);
+
+                    isTripStarted = false;
+                }
             }
         });
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+
 
     }
 
@@ -108,10 +130,50 @@ public class Map_page extends FragmentActivity implements OnMapReadyCallback {
     public void onMapReady(GoogleMap map) {
         mMap = map;
         enableMyLocation();
+
+        mgeoAPIContext = new GeoApiContext.Builder().apiKey(getString(R.string.google_maps_key)).build();
+
     }
 
-    private void startTrack(){
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    private void startTrack() {
+        if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        fusedLocationClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>(){
+        @Override
+                public void onComplete(@NonNull Task<Location> task){
+            if(task.isSuccessful()){
+                Location location = task.getResult();
+                startLatitude = location.getLatitude();
+                startLongtitude = location.getLongitude();
+                final LatLng startPosition = new LatLng(startLatitude,startLongtitude);
+                mMap.addMarker(new MarkerOptions().position(startPosition).title("start"));
+                Log.d("start", String.valueOf(startLatitude));
+            }
+            }
+        });
+    }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    private void endTrack() {
+        if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        fusedLocationClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>(){
+            @Override
+            public void onComplete(@NonNull Task<Location> task){
+                if(task.isSuccessful()){
+                    Location location = task.getResult();
+                    endLatitude = location.getLatitude();
+                    endLongtitude = location.getLongitude();
+                    final LatLng endPosition = new LatLng(endLatitude,endLongtitude);
+                    mMap.addMarker(new MarkerOptions().position(endPosition).title("end"));
+                    Log.d("end", String.valueOf(endLatitude));
+
+                }
+            }
+        });
     }
 
     /**
@@ -147,115 +209,30 @@ public class Map_page extends FragmentActivity implements OnMapReadyCallback {
     }
 
 
-
-    private void build_retrofit_and_get_response(String type) {
-
-        String url = "https://maps.googleapis.com/maps/";
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(url)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        RetrofitMaps service = retrofit.create(RetrofitMaps.class);
-
-        Call<Example> call = service.getDistanceDuration("metric", origin.latitude + "," + origin.longitude,dest.latitude + "," + dest.longitude, type);
-
-        call.enqueue(new Callback<Example>() {
-            @Override
-            public void onResponse(Response<Example> response, Retrofit retrofit) {
-
-                try {
-                    //Remove previous line from map
-                    if (line != null) {
-                        line.remove();
-                    }
-                    // This loop will go through all the results and add marker on each location.
-                    for (int i = 0; i < response.body().getRoutes().size(); i++) {
-                        String distance = response.body().getRoutes().get(i).getLegs().get(i).getDistance().getText();
-                        String time = response.body().getRoutes().get(i).getLegs().get(i).getDuration().getText();
-                        ShowDistanceDuration.setText("Distance:" + distance + ", Duration:" + time);
-                        String encodedString = response.body().getRoutes().get(0).getOverviewPolyline().getPoints();
-                        List<LatLng> list = decodePoly(encodedString);
-                        line = mMap.addPolyline(new PolylineOptions()
-                                .addAll(list)
-                                .width(20)
-                                .color(Color.RED)
-                                .geodesic(true)
-                        );
-                    }
-                } catch (Exception e) {
-                    Log.d("onResponse", "There is an error");
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void onFailure(Throwable t) {
-                Log.d("onFailure", t.toString());
-            }
-        });
-
-    }
-
-    private List<LatLng> decodePoly(String encoded) {
-        List<LatLng> poly = new ArrayList<LatLng>();
-        int index = 0, len = encoded.length();
-        int lat = 0, lng = 0;
-
-        while (index < len) {
-            int b, shift = 0, result = 0;
-            do {
-                b = encoded.charAt(index++) - 63;
-                result |= (b & 0x1f) << shift;
-                shift += 5;
-            } while (b >= 0x20);
-            int dlat = ((result & 1) != 0 ? ~(result >> 1) : (result >> 1));
-            lat += dlat;
-
-            shift = 0;
-            result = 0;
-            do {
-                b = encoded.charAt(index++) - 63;
-                result |= (b & 0x1f) << shift;
-                shift += 5;
-            } while (b >= 0x20);
-            int dlng = ((result & 1) != 0 ? ~(result >> 1) : (result >> 1));
-            lng += dlng;
-
-            LatLng p = new LatLng( (((double) lat / 1E5)),
-                    (((double) lng / 1E5) ));
-            poly.add(p);
-        }
-
-        return poly;
-    }
-
-
     @Override
     protected void onStart(){
         super.onStart();
-        Toast.makeText(this, "Start", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Start", LENGTH_LONG).show();
 
     }
 
     @Override
     protected  void onResume(){
         super.onResume();
-        Toast.makeText(this, "Resumed", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Resumed", LENGTH_LONG).show();
 
     }
 
     @Override
     protected void onPause(){
         super.onPause();
-        Toast.makeText(this, "Paused", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Paused", LENGTH_LONG).show();
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        Toast.makeText(this, "Stopped", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Stopped", LENGTH_LONG).show();
     }
 
     @Override
@@ -282,4 +259,8 @@ public class Map_page extends FragmentActivity implements OnMapReadyCallback {
                 .newInstance(true).show(getSupportFragmentManager(), "dialog");
     }
 
+    @Override
+    public void setDouble(String min) {
+
+    }
 }

@@ -25,4 +25,5 @@
     <string name="todo">at lave</string>
     <string name="end_trip">Slut Rute</string>
     <string name="start_trip">Start Rute</string>
+    <string name="select_user">Vælg en brugerr</string>
 </resources>
