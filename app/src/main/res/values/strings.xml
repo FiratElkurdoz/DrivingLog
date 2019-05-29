@@ -34,6 +34,9 @@
     <string name="register_button">Not a user? Register here</string>
     <string name="end_trip">End Trip</string>
     <string name="start_trip">Start Trip</string>
+    <string name="logsbutton" translatable="false">logsButton</string>
+    <string name="profilebutton" translatable="false">profileButton</string>
+    <string name="mapsbutton" translatable="false">mapsButton</string>
 
 
 </resources>

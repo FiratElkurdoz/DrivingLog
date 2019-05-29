@@ -44,9 +44,25 @@ public class List extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
 
-        Button yourButton = (Button) findViewById(R.id.button2);
+        Button mapPageButton = (Button) findViewById(R.id.button2);
 
-        yourButton.setOnClickListener(new View.OnClickListener(){
+        mapPageButton.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                startActivity(new Intent(List.this, List.class));
+            }
+        });
+
+        Button logsButton = (Button) findViewById(R.id.button3);
+
+        logsButton.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                startActivity(new Intent(List.this, Profile.class));
+            }
+        });
+
+        Button profileButton = (Button) findViewById(R.id.button4);
+
+        profileButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 startActivity(new Intent(List.this, Map_page.class));
             }
@@ -155,7 +171,7 @@ public class List extends AppCompatActivity {
         String json = gson.toJson(shoppingList);
         editor.putString("task list", json);
         editor.apply();
-        }
+    }
 
     private void loadData() {
         SharedPreferences sharedPreferences = getSharedPreferences("Shared prefs", MODE_PRIVATE);
