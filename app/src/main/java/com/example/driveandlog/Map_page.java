@@ -24,10 +24,8 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.maps.GeoApiContext;
 
 import static android.widget.Toast.LENGTH_LONG;
 
@@ -35,29 +33,27 @@ public class Map_page extends FragmentActivity implements OnMapReadyCallback,Geo
 
     private GoogleMap mMap;
 
-    private double startLongtitude = 55.506930;
-    private double startLatitude =  10.471870;
+   /* private String startLongtitude;
+    private String startLatitude;
 
 
-    private double endLongtitude = 55.408884;
-    private double endLatitude = 10.395557;
+    private String endLongtitude;
+    private String endLatitude;*/
 
     public boolean isTripStarted = false;
 
-    private String mDefaultLocation = "-33.8523341, 151.2106085";
     private static final int DEFAULT_ZOOM = 15;
-    private Location location;
-    private GeoApiContext mgeoAPIContext = null;
+    private Location startLocation;
+    private Location endLocation;
 
 
 
     LatLng origin;
     LatLng dest;
-    public LatLng startMarkerPoints[];
-    public LatLng endMarkerPoints[];
+    public double[] startMarkerPoints = new double[2];
+    public double[] endMarkerPoints = new double[2];
 
     TextView ShowDistanceDuration;
-    Polyline line;
 
 
     /**
@@ -98,9 +94,9 @@ public class Map_page extends FragmentActivity implements OnMapReadyCallback,Geo
                 if(!isTripStarted) {
                     Log.d("startKnap","START!");
                     startTrack();
+
                     isTripStarted = true;
                 }
-                //Log.d("location", mLastKnownLocation.toString());
             }
         });
 
@@ -112,12 +108,15 @@ public class Map_page extends FragmentActivity implements OnMapReadyCallback,Geo
                 if(isTripStarted = true) {
                     Log.d("slutKnap", "SLUT!");
                     endTrack();
-                    mDefaultLocation = mDefaultLocation.toString();
-                    String url = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=40.6655101,-73.89188969999998&destinations=40.6905615,-73.9976592&mode=driving&key=AIzaSyB6-Lyogq5ysn7MMSgX7PBUKdX2wWeA9xI";
-                    new GeoTask(Map_page.this).execute(url);
+
+                    Log.d("Array", String.valueOf(endMarkerPoints[0]));
+                    Log.d("Array", String.valueOf(endMarkerPoints[1]));
+                    Log.d("Array", String.valueOf(startMarkerPoints[0]));
+                    Log.d("Array", String.valueOf(startMarkerPoints[1]));
 
                     isTripStarted = false;
                 }
+                distanceExtractor();
             }
         });
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
@@ -131,8 +130,6 @@ public class Map_page extends FragmentActivity implements OnMapReadyCallback,Geo
         mMap = map;
         enableMyLocation();
 
-        mgeoAPIContext = new GeoApiContext.Builder().apiKey(getString(R.string.google_maps_key)).build();
-
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -144,12 +141,13 @@ public class Map_page extends FragmentActivity implements OnMapReadyCallback,Geo
         @Override
                 public void onComplete(@NonNull Task<Location> task){
             if(task.isSuccessful()){
-                Location location = task.getResult();
-                startLatitude = location.getLatitude();
-                startLongtitude = location.getLongitude();
-                final LatLng startPosition = new LatLng(startLatitude,startLongtitude);
+                startLocation = task.getResult();
+                startMarkerPoints[0] = startLocation.getLatitude();
+                startMarkerPoints[1] = startLocation.getLongitude();
+                final LatLng startPosition = new LatLng(startMarkerPoints[0],startMarkerPoints[1]);
                 mMap.addMarker(new MarkerOptions().position(startPosition).title("start"));
-                Log.d("start", String.valueOf(startLatitude));
+                Log.d("start", String.valueOf(startMarkerPoints[0]));
+
             }
             }
         });
@@ -164,18 +162,22 @@ public class Map_page extends FragmentActivity implements OnMapReadyCallback,Geo
             @Override
             public void onComplete(@NonNull Task<Location> task){
                 if(task.isSuccessful()){
-                    Location location = task.getResult();
-                    endLatitude = location.getLatitude();
-                    endLongtitude = location.getLongitude();
-                    final LatLng endPosition = new LatLng(endLatitude,endLongtitude);
+                    endLocation = task.getResult();
+                    endMarkerPoints[0] = endLocation.getLatitude();
+                    endMarkerPoints[1] = endLocation.getLongitude();
+                    final LatLng endPosition = new LatLng(endMarkerPoints[0],endMarkerPoints[1]);
                     mMap.addMarker(new MarkerOptions().position(endPosition).title("end"));
-                    Log.d("end", String.valueOf(endLatitude));
+                    Log.d("end", String.valueOf(endMarkerPoints[0]));
+
 
                 }
             }
         });
     }
-
+        private void distanceExtractor(){
+          String url = "https://maps.googleapis.com/maps/api/distancematrix/json?origins="+startMarkerPoints[0]+","+startMarkerPoints[1]+"&destinations="+endMarkerPoints[0]+","+endMarkerPoints[1]+"&mode=driving&key=AIzaSyB6-Lyogq5ysn7MMSgX7PBUKdX2wWeA9xI";
+          new GeoTask(Map_page.this).execute(url);
+        }
     /**
      * Enables the My Location layer if the fine location permission has been granted.
      */

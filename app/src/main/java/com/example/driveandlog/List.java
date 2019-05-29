@@ -9,23 +9,22 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collections;
-
-import android.widget.Toast;
-import android.widget.TextView;
-import android.widget.AdapterView;
-
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 
 public class List extends AppCompatActivity {
@@ -124,12 +123,14 @@ public class List extends AppCompatActivity {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle("Add item");
             //Allowing us to edit (type)
-            final EditText input = new EditText(this);
-            builder.setView(input);
+            final EditText logName = new EditText(this);
+            builder.setView(logName);
+            final EditText partiName = new EditText(this);
+            builder.setView(partiName);
             builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    shoppingList.add(preferredCase(input.getText().toString()));
+                    shoppingList.add(preferredCase(logName.getText().toString()));
                     Collections.reverse(shoppingList);
                     saveData();
                     lv.setAdapter(adapter);
