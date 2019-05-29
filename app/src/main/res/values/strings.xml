@@ -44,7 +44,12 @@
     <string name="profile" translatable="false">profile</string>
     <string name="Log" translatable="false">Log</string>
     <string name="Map" translatable="false">Map</string>
-    <string name="select_user">Select a user</string>
+    <string name="create_account" translatable="false">Create Account</string>
+    <string name="already_a_member_login" translatable="false">Already a member? Login</string>
+    <string name="password" translatable="false">Password</string>
+    <string name="email_create" translatable="false">Email</string>
+    <string name="name_create" translatable="false">Name</string>
+    <string name="logo" translatable="false">logo</string>
     <string name="title_activity_create__log">Create_Log</string>
 
 </resources>

@@ -16,11 +16,11 @@
     <string name="onpause_text">Din applikation er paused</string>
     <string name="register_button">Har du ikke en bruger? Opret dig her</string>
     <string name="action_add">Tilføj</string>
-    <string name="action_sort">sortere</string>
-    <string name="button">knap</string>
-    <string name="choose">vælg</string>
-    <string name="email">mail</string>
-    <string name="name">navn</string>
+    <string name="action_sort">Sorter</string>
+    <string name="button">Knap</string>
+    <string name="choose">Vælg</string>
+    <string name="email">Mail</string>
+    <string name="name">Navn</string>
     <string name="title_activity_list">liste</string>
     <string name="todo">at lave</string>
     <string name="end_trip">Slut Rute</string>

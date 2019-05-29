@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#504A4C"
+    tools:context=".SignUp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="148dp"
+        android:orientation="vertical"
+        android:paddingLeft="24dp"
+        android:paddingTop="56dp"
+        android:paddingRight="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="161dp"
+            android:layout_height="126dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="24dp"
+            android:contentDescription="@string/logo"
+            android:src="@drawable/common_google_signin_btn_icon_dark_normal" />
+
+
+        <EditText
+            android:id="@+id/input_name"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:ellipsize="start"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:gravity="center_horizontal"
+            android:hint="@string/name_create"
+            android:inputType="textCapWords" />
+
+        <!-- Email Label -->
+        <EditText
+            android:id="@+id/input_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="start"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:gravity="center_horizontal"
+            android:hint="@string/email_create"
+            android:inputType="textEmailAddress"
+            android:autofillHints="" />
+
+        <!-- Password Label -->
+        <EditText
+            android:id="@+id/input_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="start"
+            android:gravity="center_horizontal"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:hint="@string/password"
+            android:inputType="textPassword" />
+
+        <!-- Signup Button -->
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
+            android:background="#2196F3"
+            android:padding="12dp"
+            android:text="@string/create_account" />
+
+        <Button
+            android:id="@+id/btn_createacc"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:background="#2196F3"
+            android:gravity="center"
+            android:text="@string/already_a_member_login"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
