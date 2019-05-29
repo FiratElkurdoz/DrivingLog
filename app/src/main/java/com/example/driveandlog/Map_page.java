@@ -1,6 +1,7 @@
 package com.example.driveandlog;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Build;
@@ -27,7 +28,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.maps.GeoApiContext;
+
 
 import static android.widget.Toast.LENGTH_LONG;
 
@@ -47,7 +48,7 @@ public class Map_page extends FragmentActivity implements OnMapReadyCallback,Geo
     private String mDefaultLocation = "-33.8523341, 151.2106085";
     private static final int DEFAULT_ZOOM = 15;
     private Location location;
-    private GeoApiContext mgeoAPIContext = null;
+
 
 
 
@@ -83,11 +84,42 @@ public class Map_page extends FragmentActivity implements OnMapReadyCallback,Geo
         Toolbar toolbar = findViewById(R.id.toolbar);
 
 
+
+
+
+
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+
+        Button mapPageButton = (Button) findViewById(R.id.button2);
+
+        mapPageButton.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+
+                startActivity(new Intent(Map_page.this, List.class));
+            }
+        });
+
+        Button logsButton = (Button) findViewById(R.id.button3);
+
+        logsButton.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                startActivity(new Intent(Map_page.this, Profile.class));
+            }
+        });
+
+        Button profileButton = (Button) findViewById(R.id.button4);
+
+        profileButton.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                if (Map_page.this != Map_page.this) {
+                    startActivity(new Intent(Map_page.this, Map_page.class));
+                }}
+        });
 
         final Button startButton = (Button) findViewById(R.id.startButton);
         startButton.setOnClickListener(new View.OnClickListener() {
@@ -131,7 +163,7 @@ public class Map_page extends FragmentActivity implements OnMapReadyCallback,Geo
         mMap = map;
         enableMyLocation();
 
-        mgeoAPIContext = new GeoApiContext.Builder().apiKey(getString(R.string.google_maps_key)).build();
+
 
     }
 
