@@ -47,8 +47,9 @@ public class List extends AppCompatActivity {
 
         mapPageButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
+                if (List.this != List.this) {
                 startActivity(new Intent(List.this, List.class));
-            }
+            }}
         });
 
         Button logsButton = (Button) findViewById(R.id.button3);
@@ -130,7 +131,7 @@ public class List extends AppCompatActivity {
             lv.setAdapter(adapter);
             return true;
         }
-        startActivity(new Intent(List.this, Create_Log.class));
+
         if (id == R.id.Switch) {
             Button createBtn = (Button) findViewById(R.id.Switch);
 
