@@ -1,5 +1,6 @@
 package com.example.driveandlog;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -45,19 +46,32 @@ public class Create_Log extends AppCompatActivity {
                 added = addEmail.getText().toString();
                 partiList.add(added);
                 lv.setAdapter(arrayAdapter);
-
+                saveData();
             }
         });
 
         Button createBtn = (Button) findViewById(R.id.createLogBtn);
 
+
         createBtn.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-               saveData();
+                startActivity(new Intent(Create_Log.this, ViewLogs.class));
             }
         });
 
 
 
     }
+
+    private void saveData() {
+        SharedPreferences sharedPreferences = getSharedPreferences("Shared prefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        //gson: et google libary der gør det let at konvertere java objekter til json
+        Gson gson = new Gson();
+        String json = gson.toJson(partiList);
+        editor.putString("partiList", json);
+        editor.apply();
+    }
+
+
 }
