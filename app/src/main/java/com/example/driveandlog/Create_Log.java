@@ -11,7 +11,9 @@ import android.widget.ListView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class Create_Log extends AppCompatActivity {
@@ -30,7 +32,6 @@ public class Create_Log extends AppCompatActivity {
         setContentView(R.layout.activity_create__log);
 
         lv = (ListView) findViewById(R.id.create_Log_List);
-
 
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
                 this,
@@ -59,16 +60,4 @@ public class Create_Log extends AppCompatActivity {
 
 
     }
-
-
-    private void saveData() {
-        SharedPreferences sharedPreferences = getSharedPreferences("Shared prefs", MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        //gson: et google libary der gør det let at konvertere java objekter til json
-        Gson gson = new Gson();
-        String json = gson.toJson(partiList);
-        editor.putString("task list", json);
-        editor.apply();
-    }
-
 }

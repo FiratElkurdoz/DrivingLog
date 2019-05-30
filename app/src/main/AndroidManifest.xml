@@ -40,7 +40,7 @@
             android:name=".Map_page"
             android:label="Map"/>
         -->
-
+        <activity android:name=".SignUp" />
         <activity android:name=".List" />
         <activity
             android:name=".Profile"
