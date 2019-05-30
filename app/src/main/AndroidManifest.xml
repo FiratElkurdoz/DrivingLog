@@ -24,7 +24,7 @@
 
 
 
-        <activity android:name=".Create_Log">
+        <activity android:name=".LogIn">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -37,9 +37,9 @@
             android:value="@string/google_maps_key" />
 
         <activity android:name=".ViewLogs" />
-        <activity android:name=".LogIn" />
-        <activity android:name=".SignUp" />
         <activity android:name=".List" />
+        <activity android:name=".SignUp" />
+        <activity android:name=".Create_Log" />
         <activity
             android:name=".Profile"
             android:label="TEST" />

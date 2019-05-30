@@ -130,6 +130,20 @@ public class List extends AppCompatActivity {
             lv.setAdapter(adapter);
             return true;
         }
+        startActivity(new Intent(List.this, Create_Log.class));
+        if (id == R.id.Switch) {
+            Button createBtn = (Button) findViewById(R.id.Switch);
+
+
+            createBtn.setOnClickListener(new View.OnClickListener(){
+                public void onClick(View v){
+                    startActivity(new Intent(List.this, Create_Log.class));
+                }
+            });
+
+            return true;
+        }
+
 
         if (id == R.id.action_add) {
             //Create alertdialog
