@@ -50,6 +50,18 @@
     <string name="email_create" translatable="false">Email</string>
     <string name="name_create" translatable="false">Name</string>
     <string name="logo" translatable="false">logo</string>
-    <string name="title_activity_create__log">Create_Log</string>
+    <string name="title_activity_create__log" translatable="false">Create_Log</string>
+    <string name="Switch" translatable="false">Switch</string>
+    <string name="roadtrip_eu" translatable="false">Roadtrip eu</string>
+    <string name="firat" translatable="false">Firat</string>
+    <string name="dune" translatable="false">Dune</string>
+    <string name="mathias" translatable="false">Mathias</string>
+    <string name="_32_km_64" translatable="false">32 km, 64%</string>
+    <string name="_20_kr" translatable="false">20 kr</string>
+    <string name="_10_km_20" translatable="false">10 km, 20%</string>
+    <string name="_8_km_16" translatable="false">8 km, 16%</string>
+    <string name="_4_kr" translatable="false">4 kr</string>
+    <string name="_6_kr" translatable="false">6 kr</string>
+    <string name="benzin_price_9_9_kr_l" translatable="false">Benzin price 9.9 kr/L</string>
 
 </resources>
