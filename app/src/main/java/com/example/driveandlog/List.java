@@ -140,7 +140,7 @@ public class List extends AppCompatActivity {
 
         if (id == R.id.action_add) {
             //Create alertdialog
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AlertDialogCustom);
             builder.setTitle("Add item");
             //Allowing us to edit (type)
             final EditText logName = new EditText(this);

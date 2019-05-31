@@ -40,7 +40,9 @@
             android:gravity="center_horizontal"
             android:textSize="20sp"
             android:textStyle="bold"
+            android:textColor="#FFFFFF"
             android:hint="@string/email_create"
+            android:textColorHint="#FFFFFF"
             android:inputType="textEmailAddress"
             android:autofillHints="" />
 
@@ -51,9 +53,11 @@
             android:layout_height="wrap_content"
             android:textSize="20sp"
             android:textStyle="bold"
+            android:textColor="#FFFFFF"
             android:ellipsize="start"
             android:gravity="center_horizontal"
             android:hint="@string/password"
+            android:textColorHint="#FFFFFF"
             android:inputType="textPassword" />
 
         <!-- Signup Button -->
