@@ -137,15 +137,8 @@ public class Map_page extends FragmentActivity implements OnMapReadyCallback,Geo
                 if(isTripStarted = true) {
                     Log.d("slutKnap", "SLUT!");
                     endTrack();
-
-                    Log.d("Array", String.valueOf(endMarkerPoints[0]));
-                    Log.d("Array", String.valueOf(endMarkerPoints[1]));
-                    Log.d("Array", String.valueOf(startMarkerPoints[0]));
-                    Log.d("Array", String.valueOf(startMarkerPoints[1]));
-
                     isTripStarted = false;
                 }
-                distanceExtractor();
             }
         });
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
@@ -158,8 +151,8 @@ public class Map_page extends FragmentActivity implements OnMapReadyCallback,Geo
     public void onMapReady(GoogleMap map) {
         mMap = map;
         enableMyLocation();
-
     }
+
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     private void startTrack() {
@@ -197,6 +190,7 @@ public class Map_page extends FragmentActivity implements OnMapReadyCallback,Geo
                     final LatLng endPosition = new LatLng(endMarkerPoints[0],endMarkerPoints[1]);
                     mMap.addMarker(new MarkerOptions().position(endPosition).title("end"));
                     Log.d("end", String.valueOf(endMarkerPoints[0]));
+                    distanceExtractor();
 
 
                 }
