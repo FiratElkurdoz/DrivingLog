@@ -1,5 +1,6 @@
 package com.example.driveandlog;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -11,7 +12,9 @@ import android.widget.ListView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class Create_Log extends AppCompatActivity {
@@ -31,7 +34,6 @@ public class Create_Log extends AppCompatActivity {
 
         lv = (ListView) findViewById(R.id.create_Log_List);
 
-
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
                 this,
                 android.R.layout.simple_list_item_1,
@@ -44,22 +46,22 @@ public class Create_Log extends AppCompatActivity {
                 added = addEmail.getText().toString();
                 partiList.add(added);
                 lv.setAdapter(arrayAdapter);
-
+                saveData();
             }
         });
 
         Button createBtn = (Button) findViewById(R.id.createLogBtn);
 
+
         createBtn.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-               saveData();
+                startActivity(new Intent(Create_Log.this, ViewLogs.class));
             }
         });
 
 
 
     }
-
 
     private void saveData() {
         SharedPreferences sharedPreferences = getSharedPreferences("Shared prefs", MODE_PRIVATE);
@@ -67,8 +69,9 @@ public class Create_Log extends AppCompatActivity {
         //gson: et google libary der gør det let at konvertere java objekter til json
         Gson gson = new Gson();
         String json = gson.toJson(partiList);
-        editor.putString("task list", json);
+        editor.putString("partiList", json);
         editor.apply();
     }
+
 
 }
