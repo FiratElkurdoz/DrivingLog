@@ -77,7 +77,7 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/button3"
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:layout_marginStart="0dp"
@@ -85,8 +85,8 @@
             android:layout_marginEnd="0dp"
             android:layout_marginBottom="278dp"
             android:background="#2196F3"
-            android:text="@string/Log"
-            tools:text="@string/Log" />
+            android:text="@string/profile"
+            tools:text="@string/profile" />
 
         <Button
             android:id="@+id/button4"
@@ -101,7 +101,7 @@
             tools:text="Maps" />
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/button2"
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:layout_marginStart="40dp"
@@ -109,8 +109,8 @@
             android:layout_marginEnd="0dp"
             android:layout_marginBottom="0dp"
             android:background="#2196F3"
-            android:text="@string/profile"
-            tools:text="Profile" />
+            android:text="@string/Log"
+            tools:text="@string/Log" />
     </LinearLayout>
 
 
