@@ -39,15 +39,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="49dp"
-        android:layout_marginTop="373dp"
-        android:layout_marginEnd="303dp"
-        android:layout_marginBottom="211dp"
-        android:text="@string/firat"
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -78,7 +69,7 @@
             android:layout_marginTop="15dp"
             android:layout_marginEnd="303dp"
             android:layout_marginBottom="211dp"
-            android:text="Firat" />
+            android:text="@string/firat" />
 
         <TextView
             android:id="@+id/textView16"
@@ -95,8 +86,8 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginBottom="8dp"
-        android:text="@string/dune"
         android:orientation="horizontal"
+        android:text="@string/dune"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -178,7 +169,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:text="Benzin price 9.9 kr/L"
+        android:text="@string/benzin_price_9_9_kr_l"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
