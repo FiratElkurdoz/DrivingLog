@@ -37,6 +37,7 @@
             android:textSize="20sp"
             android:textStyle="bold"
             android:gravity="center_horizontal"
+            android:textColor="#FAFAFA"
             android:hint="@string/name_create"
             android:inputType="textCapWords" />
 
@@ -49,6 +50,7 @@
             android:textSize="20sp"
             android:textStyle="bold"
             android:gravity="center_horizontal"
+            android:textColor="#FAFAFA"
             android:hint="@string/email_create"
             android:inputType="textEmailAddress"
             android:autofillHints="" />
@@ -59,6 +61,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ellipsize="start"
+            android:textColor="#FAFAFA"
             android:gravity="center_horizontal"
             android:textSize="20sp"
             android:textStyle="bold"

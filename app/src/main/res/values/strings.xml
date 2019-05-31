@@ -63,6 +63,8 @@
     <string name="_6_kr" translatable="false">6 kr</string>
     <string name="benzin_price_9_9_kr_l" translatable="false">Benzin price 9.9 kr/L</string>
     <string name="firat" translatable="false">Firat</string>
+    <string name="login" translatable="false">Login</string>
+    <string name="create_an_account" translatable="false">Create an account?</string>
 
 
 </resources>
