@@ -39,6 +39,7 @@
             android:gravity="center_horizontal"
             android:textColor="#FAFAFA"
             android:hint="@string/name_create"
+            android:textColorHint="#FFFFFF"
             android:inputType="textCapWords" />
 
         <!-- Email Label -->
@@ -52,6 +53,7 @@
             android:gravity="center_horizontal"
             android:textColor="#FAFAFA"
             android:hint="@string/email_create"
+            android:textColorHint="#FFFFFF"
             android:inputType="textEmailAddress"
             android:autofillHints="" />
 
@@ -66,6 +68,7 @@
             android:textSize="20sp"
             android:textStyle="bold"
             android:hint="@string/password"
+            android:textColorHint="#FFFFFF"
             android:inputType="textPassword" />
 
         <!-- Signup Button -->
