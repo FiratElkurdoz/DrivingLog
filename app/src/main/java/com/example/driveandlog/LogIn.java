@@ -3,25 +3,32 @@ package com.example.driveandlog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
 public class LogIn extends AppCompatActivity {
+
+    // UI references
+    Button AlreadyMember;
+    Button SignUp;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
 
+        // UI references
+        AlreadyMember = (Button) findViewById(R.id.btn_login);
 
-        Button AlreadyMember = (Button) findViewById(R.id.btn_login);
+        SignUp = (Button) findViewById(R.id.btn_createacc);
 
-        AlreadyMember.setOnClickListener(v -> startActivity(new Intent(LogIn.this, Map_page.class)));
 
-        Button SignUp = (Button) findViewById(R.id.btn_createacc);
-
-        SignUp.setOnClickListener(v -> startActivity(new Intent(LogIn.this, SignUp.class)));
+        // Debug method
+        Toast.makeText(getApplicationContext(), "Lifecycle: Created", Toast.LENGTH_LONG).show();
 
     }
 
@@ -29,7 +36,17 @@ public class LogIn extends AppCompatActivity {
     protected void onStart(){
         super.onStart();
 
+        // Debug method
         Toast.makeText(getApplicationContext(), "Lifecycle: Started", Toast.LENGTH_LONG).show();
+
+        // Sign in
+        AlreadyMember.setOnClickListener(v -> startActivity(new Intent(LogIn.this, Map_page.class)));
+
+        // Sign up
+        SignUp.setOnClickListener(v -> startActivity(new Intent(LogIn.this, SignUp.class)));
+
+
+
     }
 
     @Override
@@ -37,6 +54,8 @@ public class LogIn extends AppCompatActivity {
         super.onPause();
 
         Toast.makeText(getApplicationContext(), "Lifecycle: Paused", Toast.LENGTH_LONG).show();
+
+
     }
 
     @Override
@@ -44,6 +63,7 @@ public class LogIn extends AppCompatActivity {
         super.onResume();
 
         Toast.makeText(getApplicationContext(), "Lifecycle: Resumed", Toast.LENGTH_LONG).show();
+
     }
 
     @Override
