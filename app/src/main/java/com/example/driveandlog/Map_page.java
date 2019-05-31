@@ -82,11 +82,6 @@ public class Map_page extends FragmentActivity implements OnMapReadyCallback,Geo
         Toolbar toolbar = findViewById(R.id.toolbar);
 
 
-
-
-
-
-
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
