@@ -3,12 +3,14 @@ package com.example.driveandlog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class Profile extends AppCompatActivity {
 
@@ -22,41 +24,36 @@ Uri imageUri;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        imageView = (ImageView)findViewById(R.id.imageView2);
+        SharedPreferences prefs = getSharedPreferences("MY_DATA", MODE_PRIVATE);
+
+        // getXXX(key, default value)
+        String name = prefs.getString("MY_NAME", "no name");
+        String email = prefs.getString("MY_EMAIL", "no email");
+
+        // Set values
+        ((TextView)findViewById(R.id.nameProfile)).setText(name);
+        ((TextView)findViewById(R.id.emailProfile)).setText(email);
+
+
+        imageView = findViewById(R.id.imageView2);
         button = (Button)findViewById(R.id.button);
 
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openGallery();
-            }
-        });
+        button.setOnClickListener(v -> openGallery());
 
-        Button mapPageButton = (Button) findViewById(R.id.button2);
+        Button mapPageButton = findViewById(R.id.button2);
 
-        mapPageButton.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
+        mapPageButton.setOnClickListener(v -> startActivity(new Intent(Profile.this, List.class)));
 
-                    startActivity(new Intent(Profile.this, List.class));
-                }
-        });
+        Button logsButton = findViewById(R.id.button3);
 
-        Button logsButton = (Button) findViewById(R.id.button3);
+        logsButton.setOnClickListener(v -> {
+            if (Profile.this != Profile.this) {
+            startActivity(new Intent(Profile.this, Profile.class));
+        }});
 
-        logsButton.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
-                if (Profile.this != Profile.this) {
-                startActivity(new Intent(Profile.this, Profile.class));
-            }}
-        });
+        Button profileButton = findViewById(R.id.button4);
 
-        Button profileButton = (Button) findViewById(R.id.button4);
-
-        profileButton.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
-                startActivity(new Intent(Profile.this, Map_page.class));
-            }
-        });
+        profileButton.setOnClickListener(v -> startActivity(new Intent(Profile.this, Map_page.class)));
 
 
 
